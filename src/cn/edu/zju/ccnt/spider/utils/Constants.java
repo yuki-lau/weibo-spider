@@ -29,5 +29,8 @@ public class Constants {
 	public static int LEVEL = 3;
 	public static int FANS_NO_MORE_THAN = Integer.MAX_VALUE;
 	
+	// 是否检查微博数
+	public static boolean CHECK_WEIBO_NUM = false;
+	public static int WEIBO_NO_MORE_THAN = Integer.MAX_VALUE;
 	
 }

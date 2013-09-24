@@ -9,9 +9,11 @@ import java.util.HashSet;
  */
 public class VisitedWeiboUrlQueue {
 	public static HashSet<String> visitedUrlQueue = new HashSet<String>();
+	public static int count = 0;
 	
 	public synchronized static void addElement(String url){
-		visitedUrlQueue.add(url);
+		// visitedUrlQueue.add(url);
+		count++;
 	}
 	
 	public synchronized static boolean isContains(String url){
@@ -19,6 +21,7 @@ public class VisitedWeiboUrlQueue {
 	}
 	
 	public synchronized static int size(){
-		return visitedUrlQueue.size();
+		// return visitedUrlQueue.size();
+		return count;
 	}
 }

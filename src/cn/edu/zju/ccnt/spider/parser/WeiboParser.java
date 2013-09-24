@@ -13,6 +13,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import cn.edu.zju.ccnt.spider.parser.bean.Weibo;
+import cn.edu.zju.ccnt.spider.utils.Constants;
 import cn.edu.zju.ccnt.spider.utils.DBConn;
 import cn.edu.zju.ccnt.spider.utils.Utils;
 
@@ -29,6 +30,19 @@ public class WeiboParser {
 	public static List<Element> getGoalContent(Document doc) {
 		List<Element> weiboItems = new ArrayList<Element>();
 		
+		// 检查微博数量 <span class="tc">微博[1668]</span>
+		if(Constants.CHECK_WEIBO_NUM){
+			Element element = doc.getElementsByClass("tc").get(0);
+			int startIndex = element.text().indexOf("[");
+			int endIndex = element.text().indexOf("]");
+			int weiboNum = Integer.parseInt(element.text().substring(startIndex + 1, endIndex));
+			if(weiboNum > Constants.WEIBO_NO_MORE_THAN){
+				Log.info("Number of weibos is too large: " + weiboNum);
+				return null;
+			}
+		}
+		
+		// 检查是否包含微博节点
 		Elements elements = doc.getElementsByClass("c");
 		for(Element el: elements){
 			if(el.id().startsWith("M_")){

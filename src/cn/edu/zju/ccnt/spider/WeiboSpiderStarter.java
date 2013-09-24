@@ -84,6 +84,12 @@ public class WeiboSpiderStarter {
 				Constants.FANS_NO_MORE_THAN = Integer.parseInt(properties.getProperty("follow.maxFansNum"));
 			}
 			
+			// 从配置文件中读取微博相关参数
+			Constants.CHECK_WEIBO_NUM = Boolean.parseBoolean(properties.getProperty("weibo.checkWeiboNum", "false"));
+			if(Constants.CHECK_WEIBO_NUM){
+				Constants.WEIBO_NO_MORE_THAN = Integer.parseInt(properties.getProperty("weibo.maxWeiboNum"));
+			}
+			
 			in.close();
 		} 
 		catch (FileNotFoundException e) {

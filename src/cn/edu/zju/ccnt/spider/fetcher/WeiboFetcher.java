@@ -71,6 +71,12 @@ public class WeiboFetcher {
 				contentDoc = WeiboParser.getPageDocument(content);
 				// 判断是否符合下载网页源代码到本地的条件
 				List<Element> weiboItems = WeiboParser.getGoalContent(contentDoc);
+				
+				// 微博数量超过限制，过滤掉，使其拿不到后续链接自动结束
+				if(weiboItems == null){
+					contentDoc = new Document("");
+				}
+				
 				if(weiboItems != null && weiboItems.size() > 0){
 					WeiboParser.createFile(weiboItems, url);
 				}				
